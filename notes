@@ -1,0 +1,91 @@
+Player
+has_many :characters
+  :name - string
+
+
+Character
+belongs_to :player
+  :player_id - integer, :gender - string,
+  :name - string, :race - string, 
+  :character_class - string
+
+--- terminal cmd
+
+create-react-app wow-frontend
+rails new wow-backend --api --database=postgresql
+
+check .git: ls -a
+delete .git: rm -rf .git
+
+git rm .env --cached
+git commit -m "Stopped tracking .env File"
+
+rails g resource Player name:string --no-test-framework
+rails g resource Character player_id:integer gender:string name:string race:string character_class:string --no-test-framework
+
+
+rake db:migrate
+rake db:drop
+rake db:setup
+
+rake db:seed
+rails c
+  Player.first
+  Character.first
+  Character.all
+  Character.all.length
+  Character.destroy_all
+  Player.first.characters
+  c = Player.first.characters.new(name: 'test')
+  c.save
+exit
+
+--- wow 
+npm install blizzard.js --save
+
+rails g serializer player
+rails g serializer character
+
+--- kill process 
+ps ax | grep puma
+kill -9 'process number'
+
+npm install redux react-redux redux-thunk react-router-dom --save
+
+npm install dotenv
+
+--- check backend controller is called 
+add binding.pry in Player controller create
+  params, player_params, player_params["name"] = player_params[:name]
+  player_params[:name].class
+  exit pry (ctrl+C)
+  
+  rails c
+  Player.all
+  Player.last.name
+  Player.last.name.class
+  exit
+  Player.last.destroy
+
+  ---check for state and action payload
+  place debugger in characterInput
+  console: state, action.payload, state.players
+
+  ---delete character, verify deleted character: 
+   character = Character.find(params[:id])
+   character.destroy
+   Player.find(params[:player_id]).characters
+
+   --update player name
+   params["player"]["name"]
+
+
+   ---Login
+   http://localhost:3000/rails/info/routes
+   rails g controller sessions --no-test-framework
+   rails d controller sessions (for deleting controllers)
+   byebug -- continue or exit
+   params[:session][:username]
+
+   rails g migration RenamePlayerPasswordToPasswordDigest
+   player.valid?
