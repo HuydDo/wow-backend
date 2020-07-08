@@ -45,5 +45,3 @@ gem 'active_model_serializers'
 gem 'pry'
 
 gem 'devise'
-
-gem "google-cloud-storage", "~> 1.8", require: false
